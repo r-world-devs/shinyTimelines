@@ -1,0 +1,28 @@
+Package: shinyTimelines
+Title: Timelines component for dashboards
+Version: 0.1
+Authors@R: 
+    c(
+      person("Krystian","Igras", role = c("ctb"), email = "krystian8207@gmail.com"),
+      person("Kamil", "Wais", role = c("aut", "cre"), email = "kamil.wais@gmail.com")
+    )
+Description: Package contains code of timelines component, both UI and Server function. 
+    The package allows injecting the timelines component into the app, 
+    what speeds up building reproducible part of the dashboards.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    dplyr (>= 1.0.3),
+    shiny,
+    timevis,
+    shinyWidgets,
+    shinyGizmo,
+    lubridate,
+    tibble,
+    tidyr,
+    magrittr
+Suggests:
+    stringr

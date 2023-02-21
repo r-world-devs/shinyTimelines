@@ -1,0 +1,74 @@
+.visibility-hidden {
+  visibility: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+}
+
+button.visibility-disabled {
+  pointer-events:none;
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+
+div.visibility-disabled input {
+  pointer-events:none;
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+
+div.pagination-container {
+  display: table;
+}
+
+div.pagination {
+  display: table-row;
+}
+
+div.pagination-container > div.pagination > div.pager {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  width: 80px;
+}
+
+div.pagination-container > div.pagination > button.pager {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  margin: 0 0.2rem;
+}
+
+.pagination input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* Firefox */
+.pagination input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.pagination .selectize-input:after {
+  visibility: hidden;
+}
+
+.pagination .selectize-input {
+  text-align: center;
+}
+
+.pagination .selectize-input .item {
+  line-height: 24px;
+}
+
+.pagination .selectize-control {
+  margin-bottom: 0;
+}

@@ -1,0 +1,225 @@
+public:
+  tables:
+    demographics:
+      primary_key:
+        patientid_pkey:
+          columns: [patientid]
+      nrows: 0.018669
+      columns:
+        patientid:
+          type: char(20)
+          default: .na
+          not_null: true
+          unique: true
+          nchar: 20
+          na_ratio: 0.0
+          levels_ratio: 1.0
+        dateofdeath:
+          type: Date
+          default: .na
+          not_null: false
+          unique: false
+          range:
+          - '1981-09-15'
+          - '2021-03-31'
+          na_ratio: 0.4518536
+        lastseen:
+          type: Date
+          default: .na
+          not_null: true
+          unique: false
+          range:
+          - '2011-01-05'
+          - '2021-03-31'
+          formula: !expr dplyr::if_else(!is.na(dateofdeath), dateofdeath, sample(seq(as.Date('2011-01-05'), as.Date('2021-03-31'), by = "day"), dplyr::n(), TRUE))
+          na_ratio: 0.0
+        tmp_patientid_lastseen:
+          type: character
+          formula: !expr paste0(patientid, "___", lastseen)
+    line_of_therapy:
+      foreign_keys:
+        table_line_of_therapy_fkey:
+          columns: [tmp_patientid_lastseen]
+          references:
+            columns: [tmp_patientid_lastseen]
+            table: demographics
+      nrows: 0.0568504
+      columns:
+        tmp_patientid_lastseen:
+          type: character
+          not_null: true
+        patientid:
+          type: character
+          formula: !expr gsub("___.*$", "", tmp_patientid_lastseen)
+        linenumber:
+          type: character
+          formula: !expr 1:dplyr::n()
+          group_by: patientid
+        tmp_patientid_linenumber:
+          type: character
+          formula: !expr paste0(patientid, "___", linenumber)
+          not_null: true
+        linename:
+          type: character
+          default: .na
+          not_null: true
+          unique: true
+          nchar: 112
+          na_ratio: 0.1553969
+          levels_ratio: 0.0193676
+          formula: !expr simul_line_base(dplyr::n(), c('Eribulin', 'Atezolizumab', 'Bosutinib', 'Letrozole'))
+          group_by: tmp_patientid_linenumber
+        indication:
+          type: character
+          default: .na
+          not_null: false
+          unique: false
+          nchar: 11
+          na_ratio: 0.1553969
+          levels_ratio: 8.8070809e-05
+          formula: !expr sample(c('nsclc', 'crc', 'breast', 'aml', 'bladder', 'mm'), 1)
+          group_by: patientid
+        tmp_lastseen:
+          type: Date
+          formula: !expr gsub("^.*___", "", tmp_patientid_lastseen)
+        tmp_startend_date:
+          type: character
+          spec: start_end_period
+          formula: !expr calc_startend_periods(dplyr::n(), tmp_lastseen, linenumber)
+          group_by: patientid
+        startdate:
+          type: Date
+          default: .na
+          not_null: false
+          unique: false
+          range:
+          - '1976-01-01'
+          - '2021-03-31'
+          na_ratio: 0.1553969
+          formula: !expr gsub(",.*$", "", tmp_startend_date)
+        enddate:
+          type: Date
+          default: .na
+          not_null: false
+          unique: false
+          range:
+          - '1983-12-31'
+          - '2021-03-31'
+          na_ratio: 0.1553969
+          formula: !expr gsub("^.*,", "", tmp_startend_date)
+        tmp_patientid_indication_startend:
+          type: character
+          formula: !expr paste0(patientid, "___", indication, "___", startdate, ",", enddate)
+    visit:
+      foreign_keys:
+        table_visit_fkey:
+          columns: [tmp_patientid_indication_startend]
+          references:
+            columns: [tmp_patientid_indication_startend]
+            table: line_of_therapy
+      nrows: 0.905754
+      columns:
+        tmp_patientid_indication_startend:
+          type: character
+          not_null: true
+        patientid:
+          type: character
+          default: .na
+          not_null: true
+          unique: false
+          nchar: 20
+          na_ratio: 0.0
+          formula: !expr gsub("___.*$", "", tmp_patientid_indication_startend)
+        indication:
+          type: character
+          default: .na
+          not_null: true
+          unique: false
+          nchar: 25
+          na_ratio: 0.0
+          levels_ratio: 0.0002795
+          formula: !expr gsub("___", "", stringr::str_extract(tmp_patientid_indication_startend, "___.*___"))
+        tmp_startend:
+          type: character
+          formula: !expr gsub("^.*___", "", tmp_patientid_indication_startend)
+        visitdate:
+          type: Date
+          default: .na
+          not_null: true
+          unique: false
+          range:
+          - '1753-01-01'
+          - '2021-03-31'
+          na_ratio: 0.0
+          group_by: patientid
+          formula: !expr gen_visit(dplyr::n(), tmp_startend)
+        visittype:
+          type: character
+          default: .na
+          not_null: true
+          unique: false
+          values:
+          - Vitals
+          - Treatment
+          - Lab
+          nchar: 9
+          na_ratio: 0.0
+          levels_ratio: 7.5379631e-07
+    indications:
+      foreign_keys:
+        table_indications_fkey:
+          columns: [tmp_patientid_indication_startend]
+          references:
+            columns: [tmp_patientid_indication_startend]
+            table: line_of_therapy
+      nrows: 0.0187266
+      columns:
+        tmp_patientid_indication_startend:
+          type: character
+          not_null: true
+        patientid:
+          type: character
+          default: .na
+          not_null: true
+          unique: false
+          nchar: 20
+          na_ratio: 0.0
+          levels_ratio: 0.9969253
+          formula: !expr gsub("___.*$", "", tmp_patientid_indication_startend)
+        indication:
+          type: factor
+          default: .na
+          not_null: true
+          unique: true
+          nchar: 25
+          na_ratio: 0.0
+          levels_ratio: 0.0002795
+          formula: !expr gsub("___", "", stringr::str_extract(tmp_patientid_indication_startend, "___.*___"))
+        tmp_startend:
+          type: character
+          formula: !expr gsub("^.*___", "", tmp_patientid_indication_startend)
+        tmp_startdate:
+          type: Date
+          formula: !expr gsub(",.*$", "", tmp_startend)
+        firstlinestartdate:
+          type: Date
+          default: .na
+          not_null: true
+          unique: false
+          range:
+          - '1995-11-01'
+          - '2021-03-31'
+          na_ratio: 0.4947256
+          formula: !expr as.Date(min(tmp_startdate))
+          group_by: patientid
+        diagnosisdate:
+          type: Date
+          default: .na
+          not_null: false
+          unique: false
+          range:
+          - '1933-01-20'
+          - '2021-03-25'
+          na_ratio: 0.3392883
+          formula: !expr firstlinestartdate - sample(365:(365*5), 1, TRUE)
+          group_by: patientid

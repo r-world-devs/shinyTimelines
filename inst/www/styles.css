@@ -1,0 +1,221 @@
+div[class*='vis-year19'] {
+  display: none;
+}
+.timevis.html-widget .vis-background .vis-minor.vis-odd {
+  background: initial;
+}
+.vis-labelset .vis-label{
+  color: inherit;
+}
+.vis-time-axis .vis-text{
+  color: inherit;
+}
+
+div.mod-navigation-container {
+  display: table;
+}
+
+div.mod-navigation {
+  display: table-row;
+}
+
+div.mod-navigation-container > div.mod-navigation > div.mod-navigation-tool {
+  display: table-cell;
+  vertical-align: top;
+  padding-left: 0.2rem;
+  padding-right: 1rem;
+  width: auto;
+}
+
+span.navigation-label {
+  font-weight: 600;
+}
+
+.mod-navigation-tool .material-switch {
+  padding-left: 0.5rem;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.mod-navigation-tool .shiny-input-container {
+  width: auto;
+}
+
+.mod-navigation-tool .form-group {
+  margin-bottom: 0;
+}
+
+/* to fix in the future */
+.mod-navigation-tool .dropdown .btn-light {
+  background-color: #f8f9fa;
+  border-color: #ddd;
+  color: #000;
+}
+.mod-navigation-tool .dropdown .btn-light:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.timeline-footer {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.timeline-subfooter {
+  text-align: right;
+  font-size: 12px;
+}
+
+/* timevis styling */
+
+.timevis .line-1 {
+  background-color: #51a2e5;
+}
+.timevis .line-2 {
+  background-color: #ff6696;
+}
+.timevis .line-3 {
+  background-color: #d1a4d9;
+}
+.timevis .line-4 {
+  background-color: #4cc8a4;
+}
+.timevis .line-5 {
+  background-color: #ffde7e;
+}
+.timevis .line-6 {
+  background-color: #ffbc62;
+}
+.timevis .line-7 {
+  background-color: #c9dff6;
+}
+.timevis .line-8 {
+  background-color: #ffa6c1;
+}
+.timevis .line-9 {
+  background-color: #e4c7e8;
+}
+.timevis .line-10 {
+  background-color: #9ddec6;
+}
+.timevis .line-11 {
+  background-color: #ffebb1;
+}
+.timevis .line-12 {
+  background-color: #fed6a4;
+}
+.timevis .line-13 {
+  background-color: #004c9e;
+}
+.timevis .line-14 {
+  background-color: #ba0031;
+}
+.timevis .line-15 {
+  background-color: #80428b;
+}
+.timevis .line-16 {
+  background-color: #007342;
+}
+.timevis .line-17 {
+  background-color: #c49300;
+}
+.timevis .line-18 {
+  background-color: #bd6400;
+}
+.timevis .line-19 {
+  background-color: #00346a;
+}
+.timevis .line-20 {
+  background-color: #7d0020;
+}
+.timevis .line-21 {
+  background-color: #552b5e;
+}
+.timevis .line-22 {
+  background-color: #004d2a;
+}
+.timevis .line-23 {
+  background-color: #856200;
+}
+.timevis .line-24 {
+  background-color: #7f4400;
+}
+
+.timevis .line {
+  opacity: 0.7;
+  border: none;
+}
+
+/* visits treatment */
+.mod-navigation-tool .btn-group-toggle:nth-child(1) .fa-square-check {
+  color: #3D5467;
+}
+.mod-navigation-tool .btn-group-toggle:nth-child(1) .fa-square {
+  color: #3D5467;
+}
+/* visits lab */
+.mod-navigation-tool .btn-group-toggle:nth-child(2) .fa-square-check {
+  color: #8AA29E;
+}
+.mod-navigation-tool .btn-group-toggle:nth-child(2) .fa-square {
+  color: #8AA29E;
+}
+
+/* visits vitals */
+.mod-navigation-tool .btn-group-toggle:nth-child(3) .fa-square-check {
+  color: #DB5461;
+}
+.mod-navigation-tool .btn-group-toggle:nth-child(3) .fa-square {
+  color: #DB5461;
+}
+
+.timevis .vis-item.vis-dot.index-date {
+  border-radius: 1px;
+  top: -18px !important;
+  height: 30px;
+}
+
+.timevis .vis-item.vis-dot.max-activity {
+  border-radius: 1px;
+  top: -18px !important;
+  height: 30px;
+  border-color: #666665;
+}
+
+.timevis .vis-item.vis-dot.death {
+  border-radius: 1px;
+  top: -18px !important;
+  height: 30px;
+  border-color: black;
+}
+
+.timevis .vis-item.vis-dot.extra {
+  border-radius: 1px;
+  top: 0 !important;
+  height: 12px;
+  border-color: #fcba03;
+}
+
+.timevis .vis-item.vis-dot.visit.visit-type-Treatment {
+  top: -18px !important;
+  border-color: #3D5467;
+  border-radius: 1px;
+}
+
+.timevis .vis-item.vis-dot.visit.visit-type-Lab {
+  top: -18px !important;
+  border-color: #8AA29E;
+  border-radius: 1px;
+}
+
+.timevis .vis-item.vis-dot.visit.visit-type-Vitals {
+  top: -18px !important;
+  border-color: #DB5461;
+  border-radius: 1px;
+}
+
+.timevis .vis-item.vis-point.visit.visit-type-Treatment,
+.timevis .vis-item.vis-point.visit.visit-type-Lab,
+.timevis .vis-item.vis-point.visit.visit-type-Vitals {
+  z-index: 2;
+}
