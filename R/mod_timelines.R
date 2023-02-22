@@ -54,7 +54,10 @@ shiny_timelines_ui <- function(id, pagination = 20, selected_visits = FALSE, fol
               size       = "normal",
               width      = "100%",
               checkIcon = list(
-                yes = span(style = "color: steelblue;", icon("square-check fa-solid")),
+                yes = span(
+                  style = "color: steelblue;",
+                  htmltools::tagAppendAttributes(icon("square-check"), class = " fa-solid")
+                ),
                 no  = span(style = "color: steelblue;", icon("square"))
               )
             )
