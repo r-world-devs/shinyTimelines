@@ -1,6 +1,6 @@
 Package: shinyTimelines
 Title: Timelines component for dashboards
-Version: 0.1
+Version: 0.1.1
 Authors@R: 
     c(
       person("Krystian","Igras", role = c("ctb"), email = "krystian8207@gmail.com"),

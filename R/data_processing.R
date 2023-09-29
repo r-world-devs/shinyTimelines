@@ -96,16 +96,18 @@ calc_groups_and_followup <- function(demographics, order) {
     )
 
   demographics <- demographics %>%
-    dplyr::group_by(patientid)
+    dplyr::group_by(patientid) %>%
+    rearrange_group() %>%
+    dplyr::mutate(patient_orig_no = dplyr::cur_group_id())
 
   if (identical(order, TRUE)) {
     demographics <- demographics %>%
       dplyr::mutate(max_followup = max(follow_up_time)) %>%
-      dplyr::arrange(desc(max_followup), desc(follow_up_time))
+      dplyr::arrange(desc(max_followup), desc(follow_up_time)) %>%
+      rearrange_group()
   }
 
   demographics <- demographics %>%
-    rearrange_group() %>%
     dplyr::mutate(patient_no = dplyr::cur_group_id()) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(patient_ind_no = 1:dplyr::n())
@@ -255,8 +257,9 @@ process_timelines_data <- function(demographics, lineoftherapy, extra_cols, colu
 
   groups <- demographics %>%
     dplyr::group_by(patient_no) %>%
-    dplyr::summarise(id = patient_no) %>%
-    dplyr::mutate(content = paste("Patient", id), className = "patient")
+    dplyr::summarise(id = patient_no, orig_no = patient_orig_no) %>%
+    dplyr::mutate(content = paste("Patient", orig_no), className = "patient") %>%
+    dplyr::select(-orig_no)
 
   return(list(data = data_to_plot, groups = groups))
 }
